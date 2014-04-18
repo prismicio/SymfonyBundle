@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="prismic.helper.class">Prismic\Bundle\PrismicBundle\Helper\PrismicHelper</parameter>
+        <parameter key="prismic.context.class">Prismic\Bundle\PrismicBundle\Helper\PrismicContext</parameter>
+    </parameters>
+
+    <services>
+        <service id="prismic.helper" class="%prismic.helper.class%">
+            <argument>%prismic.api.endpoint%</argument>
+            <argument>%prismic.api.accessToken%</argument>
+            <argument>%prismic.api.clientId%</argument>
+            <argument>%prismic.api.clientSecret%</argument>
+        </service>
+
+        <service id="prismic.context" class="%prismic.context.class%" scope="request">
+            <argument type="service" id="prismic.helper" />
+            <argument type="service" id="router" />
+            <call method="setAccessToken"><argument type="expression" on-invalid="null" strict="false">service('request').get('ACCESS_TOKEN')</argument></call>
+            <call method="setRef"><argument type="expression" on-invalid="null" strict="false">service('request').query.get('ref')</argument></call>
+        </service>
+    </services>
+</container>

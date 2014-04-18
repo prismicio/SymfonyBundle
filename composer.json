@@ -1,0 +1,27 @@
+{
+    "name": "prismic/prismic-bundle",
+    "type": "symfony-bundle",
+    "description": "Prismic.io integration with Symfony2",
+    "keywords": ["CMS", "Prismic", "Symfony2", "Persistence"],
+    "homepage": "http://www.prismic.io",
+    "license": "Apache 2 license",
+
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+
+    "minimum-stability": "stable",
+
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.4",
+        "sensio/framework-extra-bundle": "2.3.*",
+        "prismic/php-sdk": "dev-master"
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
