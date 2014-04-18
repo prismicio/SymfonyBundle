@@ -20,7 +20,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $ctx = $this->get('prismic.context');
-        $docs = $ctx->getApi()->forms()->everything->ref ($ctx->getRef ())->submit();
+        $docs = $ctx->getApi()->forms()->everything->ref($ctx->getRef())->submit();
 
         return array(
             'ctx' => $ctx,
@@ -38,7 +38,6 @@ class DefaultController extends Controller
         $doc = $ctx->getDocument($id);
 
         if ($doc) {
-
             if ($doc->getSlug() == $slug) {
                 return array(
                     'ctx' => $ctx,
@@ -65,9 +64,10 @@ class DefaultController extends Controller
     {
         $q = $request->query->get('q');
         $ctx = $this->get('prismic.context');
-        $docs = $ctx->getApi()->forms()->everything->ref ($ctx->getRef ())->query(
-            '[[:d = fulltext(document, "'.$q.'")]]'
-        )->submit();
+        $docs = $ctx->getApi()->forms()->everything->ref ($ctx->getRef())->query(
+                '[[:d = fulltext(document, "'.$q.'")]]'
+            )->submit()
+        ;
 
         return array(
             'ctx' => $ctx,

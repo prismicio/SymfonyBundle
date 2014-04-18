@@ -49,12 +49,16 @@ class PrismicContext
 
     public function getRef()
     {
+        if (null === $this->ref) {
+            $this->ref = $this->getMasterRef();
+        }
+
         return $this->ref;
     }
 
     public function getMasterRef()
     {
-        if (!$this->masterRef) {
+        if (null === $this->masterRef) {
             $this->masterRef = $this->getApi()->master()->getRef();
         }
 
@@ -64,7 +68,7 @@ class PrismicContext
     public function getMaybeRef()
     {
         if (!$this->maybeRef) {
-            $this->maybeRef = $this->ref == $this->getMasterRef() ? null : $this->getRef();
+            $this->maybeRef = $this->getRef() === $this->getMasterRef() ? null : $this->getRef();
         }
 
         return $this->maybeRef;
