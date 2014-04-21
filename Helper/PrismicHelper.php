@@ -20,10 +20,13 @@ class PrismicHelper
         $this->clientSecret = $clientSecret;
     }
 
+    /**
+     * @param string $customAccessToken 
+     * @return Api
+     */
     public function getApiHome($customAccessToken = null) 
     {
-        $api = Api::get($this->apiEndpoint, $customAccessToken ? $customAccessToken : $this->accessToken);
-        return $api;
+        return Api::get($this->apiEndpoint, $customAccessToken ? $customAccessToken : $this->accessToken);
     }
 
     public function getClientId()
