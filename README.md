@@ -30,8 +30,6 @@ Add the following configuration to your projects ``app/config/config.yml`` file:
 
 ## TODOs
 
-* Move to https://github.com/prismicio
-* Register on packagist.org
 * Remove SensioFrameworkExtraBundle dependency
 * Add a listener for Symfony 2.3 to set the request data into the context as 2.3 does not support ExpressionLanguage
 * Add unit (and functional?) tests
