@@ -19,6 +19,10 @@
         "prismic/php-sdk": "dev-master"
     },
 
+    "autoload": {
+        "psr-0": { "Prismic\\Bundle\\PrismicBundle": "" }
+    },
+
     "target-dir": "Prismic/Bundle/PrismicBundle",
 
     "extra": {
