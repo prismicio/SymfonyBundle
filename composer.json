@@ -19,6 +19,8 @@
         "prismic/php-sdk": "dev-master"
     },
 
+    "target-dir": "Prismic/Bundle/PrismicBundle",
+
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
