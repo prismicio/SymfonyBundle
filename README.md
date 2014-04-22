@@ -1,6 +1,6 @@
 # PrismicBundle
 
-This Bundles integrates the http://prismic.io php-kit with the Symfony Framework:
+This Bundle integrates the http://prismic.io php-kit with the Symfony Framework:
 https://github.com/prismicio/php-kit
 
 For an example use see:
@@ -35,3 +35,7 @@ Add the following configuration to your projects ``app/config/config.yml`` file:
 * Add unit (and functional?) tests
 * Provide twig templates to render documents
 * Make caching configurable once https://github.com/prismicio/php-kit/issues/32 is implemented
+
+## Credits
+
+Kudos to [lsmith77](https://github.com/lsmith77) who did all the hard work!
