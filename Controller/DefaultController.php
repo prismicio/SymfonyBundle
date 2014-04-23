@@ -2,36 +2,22 @@
 
 namespace Prismic\Bundle\PrismicBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-
-    /**
-     * @Route("/", name="home")
-     * @Template()
-     */
     public function indexAction()
     {
         $ctx = $this->get('prismic.context');
         $docs = $ctx->getApi()->forms()->everything->ref($ctx->getRef())->submit();
 
-        return array(
+        return $this->render('PrismicBundle:Default:index.html.twig', array(
             'ctx' => $ctx,
             'docs' => $docs
-        );
+        ));
     }
 
-    /**
-     * @Route("/documents/{id}/{slug}", name="detail")
-     * @Template()
-     */
     public function detailAction($id, $slug)
     {
         $ctx = $this->get('prismic.context');
@@ -39,10 +25,10 @@ class DefaultController extends Controller
 
         if ($doc) {
             if ($doc->getSlug() == $slug) {
-                return array(
+                return $this->render('PrismicBundle:Default:detail.html.twig', array(
                     'ctx' => $ctx,
                     'doc' => $doc
-                );
+                ));
             }
 
             if (in_array($slug, $doc->getSlugs())) {
@@ -51,15 +37,11 @@ class DefaultController extends Controller
                 );
             }
 
-        } 
+        }
 
         throw $this->createNotFoundException('Document not found');
     }
 
-    /**
-     * @Route("/search", name="search")
-     * @Template()
-     */
     public function searchAction(Request $request)
     {
         $q = $request->query->get('q');
@@ -69,10 +51,10 @@ class DefaultController extends Controller
             )->submit()
         ;
 
-        return array(
+        return $this->render('PrismicBundle:Default:search.html.twig', array(
             'ctx' => $ctx,
             'docs' => $docs
-        );
+        ));
     }
 
 }
