@@ -2,20 +2,11 @@
 
 namespace Prismic\Bundle\PrismicBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class OAuthController extends Controller
 {
-
-    /**
-     * @Route("/signin", name="signin")
-     */
     public function signinAction()
     {
         $prismic = $this->get('prismic.helper');
@@ -31,9 +22,6 @@ class OAuthController extends Controller
         );
     }
 
-    /**
-     * @Route("/auth_callback", name="auth_callback")
-     */ 
     public function callbackAction(Request $request)
     {
         $prismic = $this->get('prismic.helper');
@@ -61,9 +49,6 @@ class OAuthController extends Controller
         );
     }
 
-    /**
-     * @Route("/signout", name="signout")
-     */ 
     public function signout(Request $request)
     {
         $request->getSession()->clear();
