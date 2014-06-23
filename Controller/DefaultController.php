@@ -53,7 +53,7 @@ class DefaultController extends Controller
 
         return $this->render('PrismicBundle:Default:search.html.twig', array(
             'ctx' => $ctx,
-            'docs' => $docs
+            'docs' => $docs->getResults()
         ));
     }
 
