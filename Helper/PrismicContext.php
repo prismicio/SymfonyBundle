@@ -2,7 +2,7 @@
 
 namespace Prismic\Bundle\PrismicBundle\Helper;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Prismic\api;
 use Prismic\Ref;
@@ -12,7 +12,7 @@ use Prismic\Fragment\Link\DocumentLink;
 class PrismicContext
 {
     private $prismic;
-    private $router;
+    private $urlGenerator;
 
     private $accessToken;
     private $api;
@@ -25,10 +25,10 @@ class PrismicContext
      * @param PrismicHelper $prismic
      * @param RouterInterface $router
      */
-    public function __construct(PrismicHelper $prismic, RouterInterface $router)
+    public function __construct(PrismicHelper $prismic, UrlGeneratorInterface $urlGenerator)
     {
         $this->prismic = $prismic;
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -108,12 +108,20 @@ class PrismicContext
     }
 
     /**
+     * @return UrlGeneratorInterface
+     */
+    public function getUrlGenerator()
+    {
+        return $this->urlGenerator;
+    }
+
+    /**
      * @return LocalLinkResolver
      */
     public function getLinkResolver()
     {
         if (!$this->linkResolver) {
-            $this->linkResolver = new LocalLinkResolver($this->router, $this->getApi(), $this->getMaybeRef());
+            $this->linkResolver = new LocalLinkResolver($this->urlGenerator, $this->getApi(), $this->getMaybeRef());
         }
 
         return $this->linkResolver;
@@ -136,7 +144,7 @@ class PrismicContext
      *
      * @return Document|null
      */
-    public function getDocument($id) 
+    public function getDocument($id)
     {
         $docs = $this->getApi()->forms()->everything->ref($this->getRef())->query(
                 '[[:d = at(document.id, "'.$id.'")]]'
