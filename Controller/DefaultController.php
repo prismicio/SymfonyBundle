@@ -14,7 +14,7 @@ class DefaultController extends Controller
 
         return $this->render('PrismicBundle:Default:index.html.twig', array(
             'ctx' => $ctx,
-            'docs' => $docs
+            'docs' => $docs->getResults()
         ));
     }
 
