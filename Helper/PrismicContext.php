@@ -144,8 +144,8 @@ class PrismicContext
             ->submit()
         ;
 
-        if (is_array($docs) && count($docs) > 0) {
-            return $docs[0];
+        if (is_array($docs->getResults()) && count($docs->getResults()) > 0) {
+            return $docs->getResults()[0];
         }
 
         return null;
