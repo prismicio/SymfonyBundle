@@ -17,11 +17,11 @@
             <argument>%prismic.api.clientSecret%</argument>
         </service>
 
-        <service id="prismic.context" class="%prismic.context.class%" scope="request">
+        <service id="prismic.context" class="%prismic.context.class%">
             <argument type="service" id="prismic.helper" />
             <argument type="service" id="router" />
-            <call method="setAccessToken"><argument type="expression" on-invalid="null" strict="false">service('request').get('ACCESS_TOKEN')</argument></call>
-            <call method="setRef"><argument type="expression" on-invalid="null" strict="false">service('request').query.get('ref')</argument></call>
+            <call method="setAccessToken"><argument type="expression" on-invalid="null" strict="false">service('request_stack').getCurrentRequest().get('ACCESS_TOKEN')</argument></call>
+            <call method="setRef"><argument type="expression" on-invalid="null" strict="false">service('request_stack').getCurrentRequest().query.get('ref')</argument></call>
         </service>
     </services>
 </container>
