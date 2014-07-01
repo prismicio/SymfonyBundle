@@ -5,17 +5,26 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="prismic.helper.class">Prismic\Bundle\PrismicBundle\Helper\PrismicHelper</parameter>
+        <parameter key="prismic.api.class">Prismic\Api</parameter>
+        <parameter key="prismic.cache.class">Prismic\Cache\DefaultCache</parameter>
+        <parameter key="prismic.client.class">Guzzle\Http\Client</parameter>
         <parameter key="prismic.context.class">Prismic\Bundle\PrismicBundle\Helper\PrismicContext</parameter>
         <parameter key="prismic.context_listener.class">Prismic\Bundle\PrismicBundle\EventListener\ContextListener</parameter>
+        <parameter key="prismic.helper.class">Prismic\Bundle\PrismicBundle\Helper\PrismicHelper</parameter>
     </parameters>
 
     <services>
+        <service id="prismic.cache" class="%prismic.cache.class%" />
+
+        <service id="prismic.client" class="%prismic.client.class%" factory-class="%prismic.api.class%" factory-method="defaultClient" />
+
         <service id="prismic.helper" class="%prismic.helper.class%">
             <argument>%prismic.api.endpoint%</argument>
             <argument>%prismic.api.accessToken%</argument>
             <argument>%prismic.api.clientId%</argument>
             <argument>%prismic.api.clientSecret%</argument>
+            <argument type="service" id="prismic.client" />
+            <argument type="service" id="prismic.cache" />
         </service>
 
         <service id="prismic.context" class="%prismic.context.class%">
