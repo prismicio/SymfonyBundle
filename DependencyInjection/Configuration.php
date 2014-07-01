@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('client_secret')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->scalarNode('cache')->defaultTrue()->end()
             ->end()
         ;
 
