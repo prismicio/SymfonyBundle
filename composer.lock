@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f08c7f4924a671ae4355556aff2a7d0",
+    "hash": "0b2002723fa4a32fa945668205a4e244",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -228,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/prismicio/php-kit.git",
-                "reference": "a37b91ede025885ba1ef6fd335b03688fdc8c72a"
+                "reference": "d5bf5d8bd700d1f466be13a517956e04f02cc809"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prismicio/php-kit/zipball/a37b91ede025885ba1ef6fd335b03688fdc8c72a",
-                "reference": "a37b91ede025885ba1ef6fd335b03688fdc8c72a",
+                "url": "https://api.github.com/repos/prismicio/php-kit/zipball/d5bf5d8bd700d1f466be13a517956e04f02cc809",
+                "reference": "d5bf5d8bd700d1f466be13a517956e04f02cc809",
                 "shasum": ""
             },
             "require": {
@@ -244,12 +244,12 @@
             },
             "require-dev": {
                 "phpdocumentor/phpdocumentor": "2.*",
-                "phpunit/phpunit": "~3.7"
+                "phpunit/phpunit": "~4.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.4-dev"
+                    "dev-master": "1.0.5-dev"
                 }
             },
             "autoload": {
@@ -262,7 +262,7 @@
                 "Apache 2 license"
             ],
             "description": "PHP development kit for prismic.io",
-            "time": "2014-06-20 15:37:37"
+            "time": "2014-06-30 22:56:17"
         },
         {
             "name": "psr/log",
