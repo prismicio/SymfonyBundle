@@ -21,10 +21,10 @@ class PrismicHelper
     }
 
     /**
-     * @param string $customAccessToken 
+     * @param string $customAccessToken
      * @return Api
      */
-    public function getApiHome($customAccessToken = null) 
+    public function getApiHome($customAccessToken = null)
     {
         return Api::get($this->apiEndpoint, $customAccessToken ? $customAccessToken : $this->accessToken);
     }
