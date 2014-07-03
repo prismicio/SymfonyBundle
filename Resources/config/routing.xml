@@ -16,15 +16,5 @@
         <default key="_controller">PrismicBundle:Default:search</default>
     </route>
 
-    <route id="signin" pattern="/signin">
-        <default key="_controller">PrismicBundle:OAuth:signin</default>
-    </route>
-
-    <route id="auth_callback" pattern="/auth_callback">
-        <default key="_controller">PrismicBundle:OAuth:callback</default>
-    </route>
-
-    <route id="signout" pattern="/signout">
-        <default key="_controller">PrismicBundle:OAuth:signout</default>
-    </route>
+    <import resource="@PrismicBundle/Resources/config/routing/oauth.xml" />
 </routes>
