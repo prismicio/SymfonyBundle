@@ -49,7 +49,7 @@ class OAuthController extends Controller
         );
     }
 
-    public function signout(Request $request)
+    public function signoutAction(Request $request)
     {
         $request->getSession()->clear();
 
