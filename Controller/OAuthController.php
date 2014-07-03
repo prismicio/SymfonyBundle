@@ -45,7 +45,10 @@ class OAuthController extends Controller
         $request->getSession()->set('ACCESS_TOKEN', $accessToken);
 
         return $this->redirect(
-            $this->generateUrl('home')
+            $this->generateUrl(
+                $this->container->getParameter('prismic.oauth.redirect_route'),
+                $this->container->getParameter('prismic.oauth.redirect_route_params')
+            )
         );
     }
 
@@ -54,7 +57,10 @@ class OAuthController extends Controller
         $request->getSession()->clear();
 
         return $this->redirect(
-            $this->generateUrl('home')
+            $this->generateUrl(
+                $this->container->getParameter('prismic.oauth.redirect_route'),
+                $this->container->getParameter('prismic.oauth.redirect_route_params')
+            )
         );
     }
 

@@ -29,6 +29,13 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('client_secret')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('oauth')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('redirect_route')->defaultValue('home')->end()
+                        ->scalarNode('redirect_route_params')->defaultValue(array())->end()
+                    ->end()
+                ->end()
                 ->scalarNode('cache')->defaultTrue()->end()
             ->end()
         ;

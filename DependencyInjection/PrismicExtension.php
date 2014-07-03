@@ -21,6 +21,9 @@ class PrismicExtension extends Extension
         $container->setParameter($this->getAlias() . '.api.clientId', $config['api']['client_id']);
         $container->setParameter($this->getAlias() . '.api.clientSecret', $config['api']['client_secret']);
 
+        $container->setParameter($this->getAlias() . '.oauth.redirect_route', $config['oauth']['redirect_route']);
+        $container->setParameter($this->getAlias() . '.oauth.redirect_route_params', $config['oauth']['redirect_route_params']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
