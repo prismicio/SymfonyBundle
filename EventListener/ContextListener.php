@@ -29,7 +29,7 @@ class ContextListener
     {
         $request = $event->getRequest();
 
-        $this->context->setAccessToken($request->get('ACCESS_TOKEN'));
+        $this->context->setAccessToken($request->getSession()->get('ACCESS_TOKEN'));
         $this->context->setRef($request->query->get('ref'));
     }
 }
