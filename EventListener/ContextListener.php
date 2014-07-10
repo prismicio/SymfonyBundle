@@ -27,6 +27,10 @@ class ContextListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
+        if (false === $event->isMasterRequest()) {
+            return;
+        }
+
         $request = $event->getRequest();
 
         $this->context->setAccessToken($request->getSession()->get('ACCESS_TOKEN'));
