@@ -34,6 +34,9 @@ class ContextListener
         $request = $event->getRequest();
 
         $this->context->setAccessToken($request->getSession()->get('ACCESS_TOKEN'));
-        $this->context->setRef($request->query->get('ref'));
+
+        if ($ref = $request->query->get('ref')) {
+            $this->context->setRef($ref);
+        }
     }
 }
