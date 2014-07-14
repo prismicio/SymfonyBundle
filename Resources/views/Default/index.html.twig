@@ -1,7 +1,7 @@
 {% extends "PrismicBundle::layout.html.twig" %}
 
 {% block content %}
-    
+
     <form action="{{ path('search') }}" method="GET">
         {% if ctx.maybeRef %}
             <input type="hidden" name="ref" value="{{ ctx.ref }}">
@@ -9,21 +9,21 @@
         <input type="text" name="q" value="">
         <input type="submit" value="Search">
     </form>
-  
+
     <hr>
-  
+
     <h2>
-        {% if docs and docs|length == 1 %}
+        {% if docs.totalResultsSize == 1 %}
             One document found
-        {% elseif docs %}
-            {{ docs|length }} documents found
+        {% elseif docs.totalResultsSize > 0 %}
+            {{ docs.totalResultsSize }} documents found
         {% else %}
             No documents found
         {% endif %}
     </h2>
-  
+
     <ul>
-        {% for doc in docs %}
+        {% for doc in docs.results %}
             <li>
                 <a href="{{ path('detail', {'id': doc.getId, 'slug': doc.slug, 'ref': ctx.maybeRef}) }}">
                     {{ doc.slug }}
@@ -31,5 +31,7 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% include 'PrismicBundle::pagination.html.twig' %}
 
 {% endblock %}

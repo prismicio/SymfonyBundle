@@ -7,14 +7,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $ctx = $this->get('prismic.context');
-        $docs = $ctx->getApi()->forms()->everything->ref($ctx->getRef())->submit();
+        $docs = $ctx->getApi()->forms()->everything->ref($ctx->getRef())
+            ->pageSize(10)
+            ->page($request->query->get('page', 1))
+            ->submit();
 
         return $this->render('PrismicBundle:Default:index.html.twig', array(
             'ctx' => $ctx,
-            'docs' => $docs->getResults()
+            'docs' => $docs
         ));
     }
 
@@ -48,12 +51,14 @@ class DefaultController extends Controller
         $ctx = $this->get('prismic.context');
         $docs = $ctx->getApi()->forms()->everything->ref ($ctx->getRef())->query(
                 '[[:d = fulltext(document, "'.$q.'")]]'
-            )->submit()
-        ;
+            )
+            ->pageSize(10)
+            ->page($request->query->get('page', 1))
+            ->submit();
 
         return $this->render('PrismicBundle:Default:search.html.twig', array(
             'ctx' => $ctx,
-            'docs' => $docs->getResults()
+            'docs' => $docs
         ));
     }
 

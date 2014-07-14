@@ -1,19 +1,19 @@
 {% extends "PrismicBundle::layout.html.twig" %}
 
 {% block content %}
-  
+
     <h2>
-        {% if docs and docs|length == 1 %}
+        {% if docs.totalResultsSize == 1 %}
             One document found
-        {% elseif docs %}
-            {{ docs|length }} documents found
+        {% elseif docs.totalResultsSize > 0 %}
+            {{ docs.totalResultsSize }} documents found
         {% else %}
             No results
         {% endif %}
     </h2>
-  
+
     <ul>
-        {% for doc in docs %}
+        {% for doc in docs.results %}
             <li>
                 <a href="{{ ctx.resolveLink(doc) }}">
                     {{ doc.slug }}
@@ -21,5 +21,7 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% include 'PrismicBundle::pagination.html.twig' %}
 
 {% endblock %}

@@ -1,0 +1,19 @@
+{% if docs.totalPages > 1 %}
+    <ul id="pagination">
+        {% if docs.page > 1 %}
+            <li>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all()|merge({page: docs.page - 1}))) }}">Previous</a>
+            </li>
+        {% endif %}
+        {% for i in 1..docs.totalPages %}
+            <li {{ i == docs.page ? 'class="current"' : '' }}>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all()|merge({page: i}))) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        {% if docs.page < docs.totalPages %}
+            <li>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all()|merge({page: docs.page + 1}))) }}">Next</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
