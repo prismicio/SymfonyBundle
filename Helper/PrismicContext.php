@@ -32,6 +32,14 @@ class PrismicContext
     }
 
     /**
+     * @return PrismicHelper
+     */
+    public function getHelper()
+    {
+        return $this->prismic;
+    }
+
+    /**
      * @param string $accessToken
      */
     public function setAccessToken($accessToken)
