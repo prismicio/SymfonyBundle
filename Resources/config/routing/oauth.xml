@@ -5,14 +5,14 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="signin" pattern="/signin">
-        <default key="_controller">PrismicBundle:OAuth:signin</default>
+        <default key="_controller">prismic.controller.oauth:signinAction</default>
     </route>
 
     <route id="auth_callback" pattern="/auth_callback">
-        <default key="_controller">PrismicBundle:OAuth:callback</default>
+        <default key="_controller">prismic.controller.oauth:callbackAction</default>
     </route>
 
     <route id="signout" pattern="/signout">
-        <default key="_controller">PrismicBundle:OAuth:signout</default>
+        <default key="_controller">prismic.controller.oauth:signoutAction</default>
     </route>
 </routes>
