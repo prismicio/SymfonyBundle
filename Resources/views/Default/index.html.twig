@@ -3,9 +3,6 @@
 {% block content %}
 
     <form action="{{ path('search') }}" method="GET">
-        {% if ctx.maybeRef %}
-            <input type="hidden" name="ref" value="{{ ctx.ref }}">
-        {% endif %}
         <input type="text" name="q" value="">
         <input type="submit" value="Search">
     </form>
@@ -25,7 +22,7 @@
     <ul>
         {% for doc in docs.results %}
             <li>
-                <a href="{{ path('detail', {'id': doc.getId, 'slug': doc.slug, 'ref': ctx.maybeRef}) }}">
+                <a href="{{ path('detail', {'id': doc.getId, 'slug': doc.slug }) }}">
                     {{ doc.slug }}
                 </a>
             </li>

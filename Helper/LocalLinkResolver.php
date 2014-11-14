@@ -14,18 +14,16 @@ class LocalLinkResolver extends LinkResolver
 
     private $urlGenerator;
     private $api;
-    private $maybeRef;
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
      * @param Api $api
      * @param string|null $maybeRef
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, Api $api, $maybeRef = null)
+    public function __construct(UrlGeneratorInterface $urlGenerator, Api $api)
     {
         $this->urlGenerator = $urlGenerator;
         $this->api = $api;
-        $this->maybeRef = $maybeRef;
     }
 
     /**
@@ -34,7 +32,7 @@ class LocalLinkResolver extends LinkResolver
      */
     public function resolve($link)
     {
-        return $this->urlGenerator->generate('detail', array('id' => $link->getId(), 'slug' => $link->getSlug(), 'ref' => (string) $this->maybeRef));
+        return $this->urlGenerator->generate('detail', array('id' => $link->getId(), 'slug' => $link->getSlug()));
     }
 
 }

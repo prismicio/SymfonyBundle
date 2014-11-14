@@ -2,6 +2,7 @@
 
 namespace Prismic\Bundle\PrismicBundle\EventListener;
 
+use Prismic;
 use Prismic\Bundle\PrismicBundle\Helper\PrismicContext;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -33,10 +34,17 @@ class ContextListener
 
         $request = $event->getRequest();
 
-        $this->context->setAccessToken($request->getSession()->get('ACCESS_TOKEN'));
+        $previewCookie = str_replace('.', '_', Prismic\PREVIEW_COOKIE);
+        $experimentsCookie = str_replace('.', '_', Prismic\EXPERIMENTS_COOKIE);
 
-        if ($ref = $request->query->get('ref')) {
-            $this->context->setRef($ref);
+        $newRef = $this->context->getMasterRef();
+        if ($request->cookies->has($previewCookie)) {
+            $newRef = $request->cookies->get($previewCookie);
+        } else if ($request->cookies->has($experimentsCookie)) {
+            $cookie = $request->cookies->get($experimentsCookie);
+            $newRef = $this->context->getApi()->getExperiments()->refFromCookie($cookie);
         }
+        $this->context->setRef($newRef);
     }
+
 }

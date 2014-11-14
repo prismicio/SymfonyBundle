@@ -5,6 +5,7 @@ namespace Prismic\Bundle\PrismicBundle\Controller;
 use Prismic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 
 
@@ -39,7 +40,7 @@ class DefaultController extends Controller
 
             if (in_array($slug, $doc->getSlugs())) {
                 return $this->redirect(
-                    $this->generateUrl('detail', array('id' => $id, 'slug' => $doc->getSlug(), 'ref' => $ctx->getMaybeRef()))
+                    $this->generateUrl('detail', array('id' => $id, 'slug' => $doc->getSlug()))
                 );
             }
 
@@ -70,8 +71,9 @@ class DefaultController extends Controller
         $token = $request->query->get('token');
         $ctx = $this->get('prismic.context');
         $url = $ctx->getApi()->previewSession($token, $ctx->getLinkResolver(), '/');
-        $response = $this->redirect($url);
-        $response->headers->setCookie(new Cookie(Prismic\PREVIEW_COOKIE, $token, 1800));
+        $response = new RedirectResponse($url);
+        $response->headers->setCookie(new Cookie(Prismic\PREVIEW_COOKIE, $token, time() + 1800, '/', null, false, false));
         return $response;
     }
+
 }

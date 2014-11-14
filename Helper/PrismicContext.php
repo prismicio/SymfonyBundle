@@ -16,9 +16,7 @@ class PrismicContext
 
     private $accessToken;
     private $api;
-    private $masterRef;
     private $ref;
-    private $maybeRef;
     private $linkResolver;
 
     /**
@@ -56,7 +54,7 @@ class PrismicContext
     {
         $this->ref = $ref;
 
-        $this->maybeRef = $this->linkResolver = null;
+        $this->linkResolver = null;
     }
 
     /**
@@ -96,23 +94,7 @@ class PrismicContext
      */
     public function getMasterRef()
     {
-        if (null === $this->masterRef) {
-            $this->masterRef = $this->getApi()->master()->getRef();
-        }
-
-        return $this->masterRef;
-    }
-
-    /**
-     * @return Ref
-     */
-    public function getMaybeRef()
-    {
-        if (!$this->maybeRef) {
-            $this->maybeRef = (string) $this->getRef() === (string) $this->getMasterRef() ? null : $this->getRef();
-        }
-
-        return $this->maybeRef;
+        return $this->getApi()->master()->getRef();
     }
 
     /**
@@ -129,7 +111,7 @@ class PrismicContext
     public function getLinkResolver()
     {
         if (!$this->linkResolver) {
-            $this->linkResolver = new LocalLinkResolver($this->urlGenerator, $this->getApi(), $this->getMaybeRef());
+            $this->linkResolver = new LocalLinkResolver($this->urlGenerator, $this->getApi());
         }
 
         return $this->linkResolver;
@@ -154,6 +136,7 @@ class PrismicContext
      */
     public function getDocument($id)
     {
+
         $docs = $this->getApi()->forms()->everything->ref($this->getRef())->query(
                 '[[:d = at(document.id, "'.$id.'")]]'
             )
