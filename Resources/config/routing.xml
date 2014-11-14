@@ -16,5 +16,8 @@
         <default key="_controller">PrismicBundle:Default:search</default>
     </route>
 
-    <import resource="@PrismicBundle/Resources/config/routing/oauth.xml" />
+    <route id="preview" pattern="/preview">
+        <default key="_controller">PrismicBundle:Default:preview</default>
+    </route>
+
 </routes>
