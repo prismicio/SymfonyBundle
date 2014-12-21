@@ -144,7 +144,8 @@ class PrismicContext
         ;
 
         if (is_array($docs->getResults()) && count($docs->getResults()) > 0) {
-            return $docs->getResults()[0];
+            $results = $docs->getResults();
+            return $results[0];
         }
 
         return null;
