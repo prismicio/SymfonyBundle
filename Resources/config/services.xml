@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="prismic.api.class">Prismic\Api</parameter>
-        <parameter key="prismic.cache.default.class">Prismic\Cache\DefaultCache</parameter>
+        <parameter key="prismic.cache.default.class">Prismic\Cache\ApcCache</parameter>
         <parameter key="prismic.cache.no.class">Prismic\Cache\NoCache</parameter>
         <parameter key="prismic.client.class">Guzzle\Http\Client</parameter>
         <parameter key="prismic.context.class">Prismic\Bundle\PrismicBundle\Helper\PrismicContext</parameter>
@@ -19,7 +19,7 @@
         <service id="prismic.cache.default" class="%prismic.cache.default.class%" public="false" />
         <service id="prismic.cache.no" class="%prismic.cache.no.class%" public="false" />
 
-        <service id="prismic.client" class="%prismic.client.class%" factory-class="%prismic.api.class%" factory-method="defaultClient" />
+        <service id="prismic.client" class="%prismic.client.class%" factory-class="%prismic.api.class%" factory-method="defaultHttpAdapter" />
 
         <service id="prismic.helper" class="%prismic.helper.class%">
             <argument>%prismic.api.endpoint%</argument>
