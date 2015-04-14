@@ -37,14 +37,14 @@ class ContextListener
         $previewCookie = str_replace('.', '_', Prismic\PREVIEW_COOKIE);
         $experimentsCookie = str_replace('.', '_', Prismic\EXPERIMENTS_COOKIE);
 
-        $newRef = $this->context->getMasterRef();
         if ($request->cookies->has($previewCookie)) {
             $newRef = $request->cookies->get($previewCookie);
         } else if ($request->cookies->has($experimentsCookie)) {
             $cookie = $request->cookies->get($experimentsCookie);
             $newRef = $this->context->getApi()->getExperiments()->refFromCookie($cookie);
         }
-        $this->context->setRef($newRef);
+        
+        isset($newRef) and $this->context->setRef($newRef);
     }
 
 }
