@@ -9,6 +9,8 @@
         <parameter key="prismic.cache.default.class">Prismic\Cache\ApcCache</parameter>
         <parameter key="prismic.cache.no.class">Prismic\Cache\NoCache</parameter>
         <parameter key="prismic.client.class">Guzzle\Http\Client</parameter>
+        <parameter key="prismic.helper.class">Prismic\Bundle\PrismicBundle\Helper\PrismicHelper</parameter>
+        <parameter key="prismic.link_resolver.class">Prismic\Bundle\PrismicBundle\Helper\LocalLinkResolver</parameter>
         <parameter key="prismic.context.class">Prismic\Bundle\PrismicBundle\Helper\PrismicContext</parameter>
         <parameter key="prismic.context_listener.class">Prismic\Bundle\PrismicBundle\EventListener\ContextListener</parameter>
         <parameter key="prismic.controller.oauth.class">Prismic\Bundle\PrismicBundle\Controller\OAuthController</parameter>
@@ -32,12 +34,12 @@
 
         <service id="prismic.context" class="%prismic.context.class%">
             <argument type="service" id="prismic.helper" />
-            <argument type="service" id="router" />
+            <argument type="service" id="prismic.link_resolver" />
         </service>
 
         <service id="prismic.context_listener" class="%prismic.context_listener.class%">
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="10"/>
-            <argument type="service" id="prismic.context"/>
+            <argument type="service" id="prismic.context" />
         </service>
 
         <service id="prismic.controller.oauth" class="%prismic.controller.oauth.class%">
@@ -45,6 +47,10 @@
             <argument type="service" id="router" />
             <argument>%prismic.oauth.redirect_route%</argument>
             <argument>%prismic.oauth.redirect_route_params%</argument>
+        </service>
+
+        <service id="prismic.link_resolver" class="%prismic.link_resolver.class%">
+            <argument type="service" id="router" />
         </service>
     </services>
 </container>
