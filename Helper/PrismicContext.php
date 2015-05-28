@@ -12,7 +12,6 @@ use Prismic\Fragment\Link\DocumentLink;
 class PrismicContext
 {
     private $prismic;
-    private $urlGenerator;
 
     private $accessToken;
     private $api;
@@ -21,12 +20,12 @@ class PrismicContext
 
     /**
      * @param PrismicHelper $prismic
-     * @param RouterInterface $router
+     * @param LinkResolver $linkResolver
      */
-    public function __construct(PrismicHelper $prismic, UrlGeneratorInterface $urlGenerator)
+    public function __construct(PrismicHelper $prismic, LinkResolver $linkResolver)
     {
         $this->prismic = $prismic;
-        $this->urlGenerator = $urlGenerator;
+        $this->linkResolver = $linkResolver;
     }
 
     /**
@@ -44,7 +43,7 @@ class PrismicContext
     {
         $this->accessToken = $accessToken;
 
-        $this->api = $this->linkResolver = null;
+        $this->api = null;
     }
 
     /**
@@ -53,8 +52,7 @@ class PrismicContext
     public function setRef($ref)
     {
         $this->ref = $ref;
-
-        $this->linkResolver = null;
+        $this->maybeRef = null;
     }
 
     /**
@@ -97,6 +95,11 @@ class PrismicContext
         return $this->getApi()->master()->getRef();
     }
 
+    public function getMaybeRef()
+    {
+        return $this->maybeRef;
+    }
+
     /**
      * @return UrlGeneratorInterface
      */
@@ -110,9 +113,7 @@ class PrismicContext
      */
     public function getLinkResolver()
     {
-        if (!$this->linkResolver) {
-            $this->linkResolver = new LocalLinkResolver($this->urlGenerator, $this->getApi());
-        }
+        $this->linkResolver->setMaybeRef($this->getMaybeRef());
 
         return $this->linkResolver;
     }
