@@ -7,6 +7,11 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * Class PrismicExtension
+ *
+ * @package Prismic\Bundle\PrismicBundle\DependencyInjection
+ */
 class PrismicExtension extends Extension
 {
     /**

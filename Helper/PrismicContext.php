@@ -9,6 +9,11 @@ use Prismic\Ref;
 use Prismic\Document;
 use Prismic\Fragment\Link\DocumentLink;
 
+/**
+ * Class PrismicContext
+ *
+ * @package Prismic\Bundle\PrismicBundle\Helper
+ */
 class PrismicContext
 {
     private $prismic;
@@ -21,7 +26,7 @@ class PrismicContext
 
     /**
      * @param PrismicHelper $prismic
-     * @param RouterInterface $router
+     * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(PrismicHelper $prismic, UrlGeneratorInterface $urlGenerator)
     {
@@ -130,7 +135,7 @@ class PrismicContext
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return Document|null
      */

@@ -9,16 +9,25 @@ use Prismic\Ref;
 use Prismic\LinkResolver;
 use Prismic\Fragment\Link\DocumentLink;
 
+/**
+ * Class LocalLinkResolver
+ *
+ * @package Prismic\Bundle\PrismicBundle\Helper
+ */
 class LocalLinkResolver extends LinkResolver
 {
-
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
+    /**
+     * @var Api
+     */
     private $api;
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
      * @param Api $api
-     * @param string|null $maybeRef
      */
     public function __construct(UrlGeneratorInterface $urlGenerator, Api $api)
     {
@@ -28,6 +37,7 @@ class LocalLinkResolver extends LinkResolver
 
     /**
      * @param DocumentLink $link
+     *
      * @return string
      */
     public function resolve($link)
