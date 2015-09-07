@@ -7,7 +7,11 @@ use Prismic\Bundle\PrismicBundle\Helper\PrismicContext;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
+ * Class ContextListener
+ *
  * @author Robin van der Vleuten <robinvdvleuten@gmail.com>
+ *
+ * @package Prismic\Bundle\PrismicBundle\EventListener
  */
 class ContextListener
 {
@@ -26,6 +30,9 @@ class ContextListener
         $this->context = $context;
     }
 
+    /**
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (false === $event->isMasterRequest()) {

@@ -29,7 +29,7 @@ class PrismicHelper
     private $clientSecret;
 
     /**
-     * @var ClientInterface|null
+     * @var HttpAdapterInterface|null
      */
     private $client;
 
@@ -41,12 +41,12 @@ class PrismicHelper
     /**
      * Constructor.
      *
-     * @param string          $apiEndpoint
-     * @param string          $accessToken
-     * @param string          $clientId
-     * @param string          $clientSecret
-     * @param ClientInterface $client
-     * @param CacheInterface  $cache
+     * @param string               $apiEndpoint
+     * @param string               $accessToken
+     * @param string               $clientId
+     * @param string               $clientSecret
+     * @param HttpAdapterInterface $client
+     * @param CacheInterface       $cache
      */
     public function __construct($apiEndpoint, $accessToken, $clientId, $clientSecret, HttpAdapterInterface $client = null, CacheInterface $cache = null)
     {
@@ -67,21 +67,33 @@ class PrismicHelper
         return Api::get($this->apiEndpoint, $customAccessToken ? $customAccessToken : $this->accessToken, $this->client, $this->cache);
     }
 
+    /**
+     * @return null|CacheInterface
+     */
     public function getCache()
     {
         return $this->cache;
     }
 
+    /**
+     * @return HttpAdapterInterface|null
+     */
     public function getClient()
     {
         return $this->client;
     }
 
+    /**
+     * @return string
+     */
     public function getClientId()
     {
         return $this->clientId;
     }
 
+    /**
+     * @return string
+     */
     public function getClientSecret()
     {
         return $this->clientSecret;
