@@ -1,9 +1,12 @@
 {% extends "PrismicBundle::layout.html.twig" %}
 
 {% block content %}
-    
+
+    <article id="{{ doc.id }}" data-wio-id="{{ doc.id }}">
     {% autoescape false %}
+
         {{ doc.asHtml(ctx.linkResolver) }}
     {% endautoescape %}
+    </article>
 
 {% endblock %}
