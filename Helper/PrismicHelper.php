@@ -59,6 +59,14 @@ class PrismicHelper
     }
 
     /**
+     * @return String API Endpoint
+     */
+    public function getApiEndpoint()
+    {
+        return $this->apiEndpoint;
+    }
+
+    /**
      * @param string $customAccessToken
      * @return Api
      */
