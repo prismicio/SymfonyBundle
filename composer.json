@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.4",
-        "prismic/php-sdk": "~1.5.12"
+        "prismic/php-sdk": "~1.6.1"
     },
 
     "extra": {
