@@ -11,7 +11,7 @@
     },
 
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.0",
         "symfony/framework-bundle": "~2.4",
         "prismic/php-sdk": "3.*"
     },

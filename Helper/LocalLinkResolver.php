@@ -42,7 +42,6 @@ class LocalLinkResolver extends LinkResolver
      */
     public function resolve($link)
     {
-        return $this->urlGenerator->generate('detail', array('id' => $link->getId(), 'slug' => $link->getSlug()));
+        return $this->urlGenerator->generate('detail', ['id' => $link->getId(), 'slug' => $link->getSlug()]);
     }
-
 }

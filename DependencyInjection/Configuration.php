@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('redirect_route')->defaultValue('home')->end()
-                        ->scalarNode('redirect_route_params')->defaultValue(array())->end()
+                        ->scalarNode('redirect_route_params')->defaultValue([])->end()
                     ->end()
                 ->end()
                 ->scalarNode('cache')->defaultTrue()->end()

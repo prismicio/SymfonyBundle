@@ -35,7 +35,7 @@ class DefaultController extends Controller
 
         return $this->render('PrismicBundle:Default:index.html.twig', [
             'ctx' => $ctx,
-            'docs' => $docs
+            'docs' => $docs,
         ]);
     }
 
@@ -55,15 +55,15 @@ class DefaultController extends Controller
 
         if ($doc) {
             if ($doc->getSlug() == $slug) {
-                return $this->render('PrismicBundle:Default:detail.html.twig', array(
+                return $this->render('PrismicBundle:Default:detail.html.twig', [
                     'ctx' => $ctx,
-                    'doc' => $doc
-                ));
+                    'doc' => $doc,
+                ]);
             }
 
             if (in_array($slug, $doc->getSlugs())) {
                 return $this->redirect(
-                    $this->generateUrl('detail', array('id' => $id, 'slug' => $doc->getSlug()))
+                    $this->generateUrl('detail', ['id' => $id, 'slug' => $doc->getSlug(),])
                 );
             }
 
@@ -89,10 +89,10 @@ class DefaultController extends Controller
             ]
         );
 
-        return $this->render('PrismicBundle:Default:search.html.twig', array(
+        return $this->render('PrismicBundle:Default:search.html.twig', [
             'ctx' => $ctx,
-            'docs' => $docs
-        ));
+            'docs' => $docs,
+        ]);
     }
 
     /**
@@ -108,6 +108,7 @@ class DefaultController extends Controller
         $url = $ctx->getApi()->previewSession($token, $ctx->getLinkResolver(), '/');
         $response = new RedirectResponse($url);
         $response->headers->setCookie(new Cookie(Api::PREVIEW_COOKIE, $token, time() + 1800, '/', null, false, false));
+
         return $response;
     }
 
