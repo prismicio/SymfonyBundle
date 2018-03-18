@@ -28,15 +28,15 @@ class DefaultController extends Controller
     {
         /** @var PrismicContext $ctx */
         $ctx = $this->get('prismic.context');
-        $docs = $ctx->getApi()->forms()->everything->ref($ctx->getRef())
-            ->pageSize(10)
-            ->page($request->query->get('page', 1))
-            ->submit();
+        $docs = $ctx->getApi()->query(null, [
+            'pageSize' => 10,
+            'page' => $request->query->get('page', 1),
+        ]);
 
-        return $this->render('PrismicBundle:Default:index.html.twig', array(
+        return $this->render('PrismicBundle:Default:index.html.twig', [
             'ctx' => $ctx,
             'docs' => $docs
-        ));
+        ]);
     }
 
     /**
@@ -79,15 +79,15 @@ class DefaultController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $q = $request->query->get('q');
         /** @var PrismicContext $ctx */
         $ctx = $this->get('prismic.context');
-        $docs = $ctx->getApi()->forms()->everything->ref ($ctx->getRef())->query(
-                '[[:d = fulltext(document, "'.$q.'")]]'
-            )
-            ->pageSize(10)
-            ->page($request->query->get('page', 1))
-            ->submit();
+        $docs = $ctx->getApi()->query(
+            Prismic\Predicates::fulltext('document', $request->query->get('q')),
+            [
+                'pageSize' => 10,
+                'page' => $request->query->get('page', 1),
+            ]
+        );
 
         return $this->render('PrismicBundle:Default:search.html.twig', array(
             'ctx' => $ctx,
