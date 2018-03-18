@@ -150,19 +150,6 @@ class PrismicContext
      */
     public function getDocument($id)
     {
-
-        $docs = $this->getApi()->forms()->everything->ref($this->getRef())->query(
-                '[[:d = at(document.id, "'.$id.'")]]'
-            )
-            ->submit()
-        ;
-
-        if (is_array($docs->getResults()) && count($docs->getResults()) > 0) {
-            $results = $docs->getResults();
-            return $results[0];
-        }
-
-        return null;
+        return $this->getApi()->getByID($id);
     }
-
 }
