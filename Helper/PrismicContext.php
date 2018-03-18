@@ -129,7 +129,16 @@ class PrismicContext
      */
     public function resolveLink(Document $doc)
     {
-        $link = new DocumentLink($doc->getId(), $doc->getType(), $doc->getTags(), $doc->getSlug(), false);
+        $link = new DocumentLink(
+            $doc->getId(),
+            $doc->getUid(),
+            $doc->getType(),
+            $doc->getTags(),
+            $doc->getSlug(),
+            $doc->getLang(),
+            $doc->getFragments(),
+            false
+        );
 
         return $this->getLinkResolver()->resolve($link);
     }

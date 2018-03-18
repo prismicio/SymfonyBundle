@@ -2,6 +2,7 @@
 
 namespace Prismic\Bundle\PrismicBundle\Helper;
 
+use GuzzleHttp\ClientInterface;
 use Ivory\HttpAdapter\HttpAdapterInterface;
 use Prismic\Api;
 use Prismic\Cache\CacheInterface;
@@ -48,8 +49,14 @@ class PrismicHelper
      * @param HttpAdapterInterface $client
      * @param CacheInterface       $cache
      */
-    public function __construct($apiEndpoint, $accessToken, $clientId, $clientSecret, HttpAdapterInterface $client = null, CacheInterface $cache = null)
-    {
+    public function __construct(
+        $apiEndpoint,
+        $accessToken,
+        $clientId,
+        $clientSecret,
+        ClientInterface $client = null,
+        CacheInterface $cache = null
+    ) {
         $this->apiEndpoint = $apiEndpoint;
         $this->accessToken = $accessToken;
         $this->clientId = $clientId;
@@ -72,7 +79,12 @@ class PrismicHelper
      */
     public function getApiHome($customAccessToken = null)
     {
-        return Api::get($this->apiEndpoint, $customAccessToken ? $customAccessToken : $this->accessToken, $this->client, $this->cache);
+        return Api::get(
+            $this->apiEndpoint,
+            $customAccessToken ? $customAccessToken : $this->accessToken,
+            $this->client,
+            $this->cache
+        );
     }
 
     /**

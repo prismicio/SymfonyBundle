@@ -3,6 +3,7 @@
 namespace Prismic\Bundle\PrismicBundle\EventListener;
 
 use Prismic;
+use Prismic\Api;
 use Prismic\Bundle\PrismicBundle\Helper\PrismicContext;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -41,8 +42,8 @@ class ContextListener
 
         $request = $event->getRequest();
 
-        $previewCookie = str_replace('.', '_', Prismic\PREVIEW_COOKIE);
-        $experimentsCookie = str_replace('.', '_', Prismic\EXPERIMENTS_COOKIE);
+        $previewCookie = str_replace('.', '_', Api::PREVIEW_COOKIE);
+        $experimentsCookie = str_replace('.', '_', API::EXPERIMENTS_COOKIE);
 
         if ($request->cookies->has($previewCookie)) {
             $newRef = $request->cookies->get($previewCookie);

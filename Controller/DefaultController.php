@@ -3,6 +3,7 @@
 namespace Prismic\Bundle\PrismicBundle\Controller;
 
 use Prismic;
+use Prismic\Api;
 use Prismic\Bundle\PrismicBundle\Helper\PrismicContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -106,7 +107,7 @@ class DefaultController extends Controller
         $ctx = $this->get('prismic.context');
         $url = $ctx->getApi()->previewSession($token, $ctx->getLinkResolver(), '/');
         $response = new RedirectResponse($url);
-        $response->headers->setCookie(new Cookie(Prismic\PREVIEW_COOKIE, $token, time() + 1800, '/', null, false, false));
+        $response->headers->setCookie(new Cookie(Api::PREVIEW_COOKIE, $token, time() + 1800, '/', null, false, false));
         return $response;
     }
 
