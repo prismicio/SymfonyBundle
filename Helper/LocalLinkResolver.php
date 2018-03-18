@@ -2,12 +2,8 @@
 
 namespace Prismic\Bundle\PrismicBundle\Helper;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
-use Prismic\Api;
-use Prismic\Ref;
 use Prismic\LinkResolver;
-use Prismic\Fragment\Link\DocumentLink;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class LocalLinkResolver
@@ -20,29 +16,36 @@ class LocalLinkResolver extends LinkResolver
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
+
     /**
-     * @var Api
+     * @var string
      */
-    private $api;
+    private $routeName;
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
      * @param Api $api
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, Api $api)
+    public function __construct(UrlGeneratorInterface $urlGenerator, $routeName)
     {
         $this->urlGenerator = $urlGenerator;
-        $this->api = $api;
+        $this->routeName = $routeName;
     }
 
     /**
-     * @param DocumentLink $link
+     * @param \Prismic\Fragment\Link\DocumentLink $link
      *
      * @return string
      */
     public function resolve($link)
     {
-        return $this->urlGenerator->generate('detail', array('id' => $link->getId(), 'slug' => $link->getSlug()));
+        return $this->urlGenerator->generate(
+            $this->routeName,
+            [
+                'id' => $link->getId(),
+                'slug' => $link->getSlug(),
+            ]
+        );
     }
 
 }

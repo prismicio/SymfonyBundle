@@ -18,23 +18,27 @@ Add the following dependencies to your projects ``composer.json`` file:
 
 ## Configuration
 
-Add the following configuration to your projects ``app/config/config.yml`` file:
+Full default configuration for bundle:
 
-    # Default configuration for extension with alias: "prismic"
-    prismic:
-        api:
-            endpoint:             ~ # Required
-            access_token:         ~
-            client_id:            ~
-            client_secret:        ~
+```yaml
+prismic:
+  api:
+    endpoint:               ~      # Required
+    access_token:           ~
+    client_id:              ~
+    client_secret:          ~
+  oauth:
+    redirect_route:         home   # Name of the route
+    redirect_route_params:  []     # An array with additional route params
+  cache:                    true   # Default apc built-in cache
+  link_resolver_route:      detail # Name of the route
+```
 
-You can override the redirect route from the bundle configuration:
+## LinkResolver Customization
 
-    # Default configuration for extension with alias: "prismic"
-    prismic:
-        oauth:
-            redirect_route:         home # Name of the route
-            redirect_route_params:  []   # An array with additional route params
+You can override `prismic.link_resolver_route` parameter with route name to handle link resolver.
+This route can have `$id` or `$slug` parameter to find document.
+If you want to implement custom logic for your LinkResolver you can override service `prismic.link_resolver`.
 
 ## TODOs
 

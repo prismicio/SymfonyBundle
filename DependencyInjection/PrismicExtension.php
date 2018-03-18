@@ -29,9 +29,11 @@ class PrismicExtension extends Extension
         $container->setParameter($this->getAlias() . '.oauth.redirect_route', $config['oauth']['redirect_route']);
         $container->setParameter($this->getAlias() . '.oauth.redirect_route_params', $config['oauth']['redirect_route_params']);
 
+        $container->setParameter($this->getAlias() . '.link_resolver_route', $config['link_resolver_route']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setAlias('prismic.cache', 'prismic.cache.' . ($config['cache'] ? 'default' : 'no'));
+        $container->setAlias($this->getAlias() . '.cache', $this->getAlias() . '.cache.' . ($config['cache'] ? 'default' : 'no'));
     }
 }

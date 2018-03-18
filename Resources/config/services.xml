@@ -13,6 +13,7 @@
         <parameter key="prismic.context_listener.class">Prismic\Bundle\PrismicBundle\EventListener\ContextListener</parameter>
         <parameter key="prismic.controller.oauth.class">Prismic\Bundle\PrismicBundle\Controller\OAuthController</parameter>
         <parameter key="prismic.helper.class">Prismic\Bundle\PrismicBundle\Helper\PrismicHelper</parameter>
+        <parameter key="prismic.helper.link_resolver.class">Prismic\Bundle\PrismicBundle\Helper\LocalLinkResolver</parameter>
     </parameters>
 
     <services>
@@ -20,6 +21,11 @@
         <service id="prismic.cache.no" class="%prismic.cache.no.class%" public="false" />
 
         <service id="prismic.client" class="%prismic.client.class%" factory-class="%prismic.api.class%" factory-method="defaultHttpAdapter" />
+
+        <service id="prismic.link_resolver" class="%prismic.helper.link_resolver.class%">
+            <argument type="service" id="router"></argument>
+            <argument>%prismic.link_resolver_route%</argument>
+        </service>
 
         <service id="prismic.helper" class="%prismic.helper.class%">
             <argument>%prismic.api.endpoint%</argument>
@@ -33,6 +39,7 @@
         <service id="prismic.context" class="%prismic.context.class%">
             <argument type="service" id="prismic.helper" />
             <argument type="service" id="router" />
+            <argument type="service" id="prismic.link_resolver" />
         </service>
 
         <service id="prismic.context_listener" class="%prismic.context_listener.class%">

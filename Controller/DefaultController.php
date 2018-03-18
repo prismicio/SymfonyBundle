@@ -101,13 +101,10 @@ class DefaultController extends Controller
      */
     public function previewAction(Request $request)
     {
-        $token = $request->query->get('token');
         /** @var PrismicContext $ctx */
         $ctx = $this->get('prismic.context');
-        $url = $ctx->getApi()->previewSession($token, $ctx->getLinkResolver(), '/');
-        $response = new RedirectResponse($url);
-        $response->headers->setCookie(new Cookie(Prismic\PREVIEW_COOKIE, $token, time() + 1800, '/', null, false, false));
-        return $response;
+
+        return $ctx->previewSession($request->query->get('token'), '/');
     }
 
 }

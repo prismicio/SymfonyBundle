@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('cache')->defaultTrue()->end()
+                ->scalarNode('link_resolver_route')->defaultValue('detail')->end()
             ->end()
         ;
 
